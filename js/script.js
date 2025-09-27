@@ -18,17 +18,28 @@ function welcomeMessage() {
 
 /// Form Validation
 function validateForm() {
-    /// Get form values
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let message = document.getElementById("message").value;
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const commentList = document.getElementById("commentList");
 
-    /// Simple validation
-    if (name === "" || email === "" || message === "") {
-        /// If any field is empty, show an alert
-        alert("Please fill in all fields.");
-    } else {
-        /// If all fields are filled, show a success message
-        alert(`Thanks, ${name}! Form submitted successfully!`);
-    }
+  // Validasi manual
+  if (name === "" || email === "" || message === "") {
+    alert("Semua field harus diisi!");
+    return;
+  }
+
+  // Buat elemen komentar baru
+  const li = document.createElement("li");
+  li.className = "border p-4 rounded bg-gray-100";
+  li.innerHTML = `
+    <p><strong>${name}</strong> (${email})</p>
+    <p>${message}</p>
+  `;
+
+  // Masukkan ke dalam list komentar
+  commentList.appendChild(li);
+
+  // Reset form
+  document.getElementById("messageForm").reset();
 }
